@@ -2,8 +2,32 @@
 Created on Wed Feb  5 08:29:58 2020
 
 @author: Rudik Roberto Rompich
-@class: Herramientas Tecnologicas
+@carnet: 19857
+@clase: Herramientas Tecnologicas
 """
+import numpy as np
+
+def UPC(numero):
+
+    impares = 0
+    pares = 0
+    for i, lol in enumerate(numero):
+        j = i+1
+
+    if j % 2 == 0:
+     pares += int(lol)
+    else:
+     impares += int(lol)
+
+    suma = (impares * 3) + pares
+
+    resultado = suma % 10
+
+
+
+
+
+
 
 lol = int(input("\n|BIENVENIDO AL VERFICADOR DE CODIGOS: | \n" +
 
@@ -19,7 +43,7 @@ while lol !=3:
 
     if lol ==1:
 
-        x = int(input("¿Qué código quiere combrobar?: \n" +
+        x = int(input("¿Qué código quiere comprobar?: \n" +
                           "1. UPC \n" +
                           "2. ISBN - 10 \n" +
                           "3. ISBN - 13 \n" +
@@ -29,13 +53,44 @@ while lol !=3:
         while x != 5:
 
              if x ==1:
-                 print("1")
+                 upc = str(input("Ingresar número UPC: "))
+
+                 if len(upc) ==12:
+                     UPC(upc)
+
+                 else:
+                     print("No es un valor admitido de UPC, vuelva a intentarlo.")
+
+
              elif x ==2:
-                 print("2")
+                 isbn10 = int(input("Ingresar número ISBN-10: "))
+
+                 if len(isbn10) ==10:
+                     print("1")
+
+                 else:
+                     print("No es un valor admitido de ISBN-10, vuelva a intentarlo.")
+
              elif x ==3:
-                 print("3")
+                 isbn13 = int(input("Ingresar número ISBN-13: "))
+
+                 if len(isbn13) ==13:
+                     print("1")
+
+                 else:
+                     print("No es un valor admitido de ISBN-13, vuelva a intentarlo.")
+
              elif x ==4:
                  print("4")
+
+                 isbn13 = int(input("Ingresar número de NIT: "))
+
+                 if len(isbn13) ==12:
+                     print("1")
+
+                 else:
+                     print("No es un valor admitido de NIT, vuelva a intentarlo.")
+
              else:
 
                  print("Ingresar valor válido")
