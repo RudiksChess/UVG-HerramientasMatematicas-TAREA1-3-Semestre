@@ -62,7 +62,7 @@ def ISBN10(numero):
     Output: Resultado válido o inválido de UPC basado en módulo 13 """
 
 
-def UPC_ISBN13(numero):
+def ISBN13(numero):
 
     impares = 0
     pares = 0
@@ -84,28 +84,9 @@ def UPC_ISBN13(numero):
     else:
         print("---> Es un valor inválido de ISBN 13\n")
 
-def NIT(numero):
-
-
-    suma=0
-
-    conversion= np.array(list(numero))
-
-    for i,j in zip(conversion, range(2,len(numero))):
-
-        k = int(i)*j
-
-        suma += k
-
-    comprobacion = suma%11
-
-    if comprobacion == 0:
-        print("---> Es un valor válido de NIT\n")
-
-    else:
-        print("---> Es un valor inválido de NIT\n")
-
-
+""" Función 4
+    Input: un número de NIT dando por el usuario 
+    Output: Resultado válido o inválido de NIT basado en una operación de la SAT """
 def NIT(numero):
 
 
@@ -139,13 +120,13 @@ def NIT(numero):
 
 
 
-lol = int(input("\n|BIENVENIDO AL VERFICADOR DE CODIGOS: | \n" +
+lol = int(input("\n|BIENVENIDO AL VERFICADOR DE CÓDIGOS: | \n" +
 
-            "SELECCIONE UNA OPCION: \n\n" +
+            "SELECCIONE UNA OPCIÓN: \n\n" +
             "1. VERIFICAR \n" +
-            "2. DIGITO DE CONTROL\n" +
+            "2. CREAR DÍGITO DE CONTROL\n" +
             "3. SALIR \n\n" +
-            "OPCION:"))
+            "OPCIÓN:"))
 
 while lol !=3:
 
@@ -186,7 +167,7 @@ while lol !=3:
                  isbn13 = str(input("Ingresar número ISBN-13: "))
 
                  if len(isbn13) ==13:
-                     print("1")
+                     ISBN13(isbn13)
 
                  else:
                      print("No es un valor admitido de ISBN-13, vuelva a intentarlo.")
@@ -194,10 +175,10 @@ while lol !=3:
              elif x ==4:
                  print("4")
 
-                 isbn13 = str(int(input("Ingresar número de NIT: ")))
+                 nit = str(int(input("Ingresar número de NIT: ")))
 
-                 if len(isbn13) ==12:
-                     print("1")
+                 if len(nit) ==12:
+                     NIT(nit)
 
                  else:
                      print("No es un valor admitido de NIT, vuelva a intentarlo.")
@@ -218,7 +199,7 @@ while lol !=3:
 
     elif lol ==2:
 
-      y = int(input("¿A 1ué código quiere generarle un número de verificación?: \n" +
+      y = int(input("¿A qué código quiere generarle un número de verificación?: \n" +
                     "1. UPC \n" +
                     "2. ISBN - 10 \n" +
                     "3. ISBN - 13 \n" +
@@ -239,7 +220,7 @@ while lol !=3:
 
               print("Ingresar valor válido")
 
-          y = int(input("¿A 1ué código quiere generarle un número de verificación?: \n" +
+          y = int(input("¿A qué código quiere generarle un número de verificación?: \n" +
                         "1. UPC \n" +
                         "2. ISBN - 10 \n" +
                         "3. ISBN - 13 \n" +
@@ -258,13 +239,13 @@ while lol !=3:
 
 
 
-    lol = int(input("\n|BIENVENIDO AL VERFICADOR DE CODIGOS: | \n" +
+    lol = int(input("\n|BIENVENIDO AL VERFICADOR DE CÓDIGOS: | \n" +
 
-                "SELECCIONE UNA OPCION: \n\n" +
+                "SELECCIONE UNA OPCIÓN: \n\n" +
                 "1. VERIFICAR \n" +
-                "2. DIGITO DE CONTROL\n" +
+                "2. DÍGITO DE CONTROL\n" +
                 "3. SALIR \n\n" +
-                "OPCION:"))
+                "OPCIÓN:"))
 
  except ValueError:
 
