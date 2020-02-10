@@ -1,6 +1,9 @@
 """ Función 4
     Input: un número de NIT dando por el usuario 
     Output: Resultado válido o inválido de NIT basado en una operación de la SAT """
+
+import numpy as np 
+import math
 def NIT(numero):
 
 
