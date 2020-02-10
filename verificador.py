@@ -6,6 +6,11 @@ Created on Wed Feb  5 08:29:58 2020
 @clase: Herramientas Tecnologicas
 """
 import numpy as np
+import math
+
+""" Función 1
+    Input: un número de UPC dando por el usuario 
+    Output: Resultado válido o inválido de UPC basado en módulo 10 """
 
 def UPC(numero):
 
@@ -14,18 +19,123 @@ def UPC(numero):
     for i, lol in enumerate(numero):
         j = i+1
 
-    if j % 2 == 0:
-     pares += int(lol)
-    else:
-     impares += int(lol)
+        if j % 2 == 0:
+            pares += int(lol)
+        else:
+            impares += int(lol)
 
     suma = (impares * 3) + pares
 
     resultado = suma % 10
 
+    if resultado ==0:
+        print("---> Es un valor válido de UPC\n")
+
+    else:
+        print("---> Es un valor inválido de UPC\n")
+
+""" Función 2
+    Input: un número de ISBN10 dando por el usuario 
+    Output: Resultado válido o inválido de UPC basado en módulo 11 """
+
+def ISBN10(numero):
+    suma=0
+    conversion= np.array(list(numero))
+
+    for i,j in zip(conversion, range(1,11)):
+
+        k = int(i)*j
+
+        suma += k
+
+    comprobacion = suma%11
+
+    if comprobacion == 0:
+        print("---> Es un valor válido de ISBN10\n")
+
+    else:
+        print("---> Es un valor inválido de ISBN10\n")
 
 
+""" Función 3
+    Input: un número de ISBN13 dando por el usuario 
+    Output: Resultado válido o inválido de UPC basado en módulo 13 """
 
+
+def UPC_ISBN13(numero):
+
+    impares = 0
+    pares = 0
+    for i, lol in enumerate(numero):
+        j = i+1
+
+        if j % 2 == 0:
+            pares += int(lol)
+        else:
+            impares += int(lol)
+
+    suma = (pares * 3) + impares
+
+    resultado = suma % 10
+
+    if resultado ==0:
+        print("---> Es un valor válido de ISBN 13\n")
+
+    else:
+        print("---> Es un valor inválido de ISBN 13\n")
+
+def NIT(numero):
+
+
+    suma=0
+
+    conversion= np.array(list(numero))
+
+    for i,j in zip(conversion, range(2,len(numero))):
+
+        k = int(i)*j
+
+        suma += k
+
+    comprobacion = suma%11
+
+    if comprobacion == 0:
+        print("---> Es un valor válido de NIT\n")
+
+    else:
+        print("---> Es un valor inválido de NIT\n")
+
+
+def NIT(numero):
+
+
+    suma=0
+
+    conversion= np.array(list(numero))
+    reversa= np.flip(conversion)
+    eliminar1= np.delete(reversa,0)
+
+
+    for i,j in zip(eliminar1, range(2,len(numero)+1)):
+
+        k = int(i)*j
+
+        suma += k
+
+    comprobacion = math.floor(suma/11)
+    verificacion = comprobacion*11
+    operacion1 = suma - verificacion
+    operacion2= math.floor(operacion1/11)
+    operacion3= operacion2*11
+    operacion4 = operacion1-operacion3
+    operacion5= 11-operacion4
+
+
+    if operacion5== int(conversion[-1]):
+        print("---> Es un valor válido de NIT\n")
+
+    else:
+        print("---> Es un valor inválido de NIT\n")
 
 
 
@@ -58,21 +168,22 @@ while lol !=3:
                  if len(upc) ==12:
                      UPC(upc)
 
+
                  else:
                      print("No es un valor admitido de UPC, vuelva a intentarlo.")
 
 
              elif x ==2:
-                 isbn10 = int(input("Ingresar número ISBN-10: "))
+                 isbn10 = str(input("Ingresar número ISBN-10: "))
 
                  if len(isbn10) ==10:
-                     print("1")
+                     ISBN10(isbn10)
 
                  else:
                      print("No es un valor admitido de ISBN-10, vuelva a intentarlo.")
 
              elif x ==3:
-                 isbn13 = int(input("Ingresar número ISBN-13: "))
+                 isbn13 = str(input("Ingresar número ISBN-13: "))
 
                  if len(isbn13) ==13:
                      print("1")
@@ -83,7 +194,7 @@ while lol !=3:
              elif x ==4:
                  print("4")
 
-                 isbn13 = int(input("Ingresar número de NIT: "))
+                 isbn13 = str(int(input("Ingresar número de NIT: ")))
 
                  if len(isbn13) ==12:
                      print("1")
