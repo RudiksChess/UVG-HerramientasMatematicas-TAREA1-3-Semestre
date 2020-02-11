@@ -4,34 +4,41 @@
 
 import numpy as np 
 import math
-def NIT(numero):
 
 
-    suma=0
 
-    conversion= np.array(list(numero))
-    reversa= np.flip(conversion)
-    eliminar1= np.delete(reversa,0)
+def UPC_Digito(num):
+
+    impares = 0
+    pares = 0
+    for i, lol in enumerate(num):
+        j = i+1
+
+        if j % 2 == 0:
+            pares += int(lol)
+        else:
+            impares += int(lol)
+
+    suma = (impares * 3) + pares
+
+    resultado = suma % 10
+
+    digito = 10- resultado
+
+    if digito == 10:
+        digito == 0
 
 
-    for i,j in zip(eliminar1, range(2,len(numero)+1)):
+    numfinal = num+ str(digito)
+    numfinalint = int(numfinal)
 
-        k = int(i)*j
-
-        suma += k
-
-    comprobacion = math.floor(suma/11)
-    verificacion = comprobacion*11
-    operacion1 = suma - verificacion
-    operacion2= math.floor(operacion1/11)
-    operacion3= operacion2*11
-    operacion4 = operacion1-operacion3
-    operacion5= 11-operacion4
-
-
-    if operacion5== int(conversion[-1]):
-        print("---> Es un valor válido de NIT\n")
+    if isinstance(numfinalint,int):
+        print("---> El NIT con el digito identificador es: "+numfinal)
 
     else:
-        print("---> Es un valor inválido de NIT\n")
+        print("---> Es un valor inválido de UPC\n")
 
+
+vat = "04210000526"
+
+UPC_Digito(vat)

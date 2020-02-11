@@ -87,8 +87,9 @@ def ISBN13(numero):
 """ Función 4
     Input: un número de NIT dando por el usuario 
     Output: Resultado válido o inválido de NIT basado en una operación de la SAT """
-def NIT(numero):
 
+
+def NIT(numero):
 
     suma=0
 
@@ -118,6 +119,55 @@ def NIT(numero):
     else:
         print("---> Es un valor inválido de NIT\n")
 
+def UPC_Digito(num):
+
+    impares = 0
+    pares = 0
+    for i, lol in enumerate(num):
+        j = i+1
+
+        if j % 2 == 0:
+            pares += int(lol)
+        else:
+            impares += int(lol)
+
+    suma = (impares * 3) + pares
+
+    resultado = suma % 10
+
+    digito = 10- resultado
+
+    if digito == 10:
+        digito == 0
+
+
+    numfinal = num+ str(digito)
+    numfinalint = int(numfinal)
+
+    if isinstance(numfinalint,int):
+        print("---> El NIT con el digito identificador es: "+numfinal)
+
+    else:
+        print("---> Es un valor inválido de UPC\n")
+
+def ISBN10_Digito(numero):
+
+    suma=0
+    conversion= np.array(list(numero))
+
+    for i,j in zip(conversion, range(1,10)):
+
+        k = int(i)*j
+
+        suma += k
+
+    comprobacion = suma%11
+
+    if comprobacion == 0:
+        print("---> Es un valor válido de ISBN10\n")
+
+    else:
+        print("---> Es un valor inválido de ISBN10\n")
 
 
 lol = int(input("\n|BIENVENIDO AL VERFICADOR DE CÓDIGOS: | \n" +
@@ -127,6 +177,8 @@ lol = int(input("\n|BIENVENIDO AL VERFICADOR DE CÓDIGOS: | \n" +
             "2. CREAR DÍGITO DE CONTROL\n" +
             "3. SALIR \n\n" +
             "OPCIÓN:"))
+
+
 
 while lol !=3:
 
@@ -173,11 +225,11 @@ while lol !=3:
                      print("No es un valor admitido de ISBN-13, vuelva a intentarlo.")
 
              elif x ==4:
-                 print("4")
 
-                 nit = str(int(input("Ingresar número de NIT: ")))
+                 nit = str(input("Ingresar número de NIT: "))
+                 nit2 = int(nit)
 
-                 if len(nit) ==12:
+                 if isinstance(nit2,int):
                      NIT(nit)
 
                  else:
@@ -209,7 +261,9 @@ while lol !=3:
       while y != 5:
 
           if y ==1:
-              print("1")
+              nit = str(input("Ingresar número de UPC sin verificador: "))
+              UPC_Digito(nit)
+
           elif y ==2:
               print("2")
           elif y ==3:
