@@ -36,7 +36,7 @@ def UPC(numero):
 
 """ Función 2
     Input: un número de ISBN10 dando por el usuario 
-    Output: Resultado válido o inválido de UPC basado en módulo 11 """
+    Output: Resultado válido o inválido de ISBN10 basado en módulo 11 """
 
 def ISBN10(numero):
     suma=0
@@ -59,7 +59,7 @@ def ISBN10(numero):
 
 """ Función 3
     Input: un número de ISBN13 dando por el usuario 
-    Output: Resultado válido o inválido de UPC basado en módulo 13 """
+    Output: Resultado válido o inválido de ISBN13 basado en módulo 13 """
 
 
 def ISBN13(numero):
@@ -119,6 +119,10 @@ def NIT(numero):
     else:
         print("---> Es un valor inválido de NIT\n")
 
+""" Función 5
+    Input: un número de UPC sin verificador dando por el usuario 
+    Output: Resultado UPC con verificador """
+
 def UPC_Digito(num):
 
     impares = 0
@@ -150,24 +154,97 @@ def UPC_Digito(num):
     else:
         print("---> Es un valor inválido de UPC\n")
 
+""" Función 6
+    Input: un número de ISBN10 sin verificador dando por el usuario 
+    Output: Resultado ISBN10 con verificador """
+
 def ISBN10_Digito(numero):
 
     suma=0
     conversion= np.array(list(numero))
 
-    for i,j in zip(conversion, range(1,10)):
+    for i,j in zip(conversion, reversed(range(2,11))):
 
         k = int(i)*j
 
         suma += k
 
     comprobacion = suma%11
+    verificacion= (11-comprobacion)%11
 
-    if comprobacion == 0:
-        print("---> Es un valor válido de ISBN10\n")
+    if isinstance(verificacion,int):
+        print("---> El ISBN10 con el dígito identificador es:"+ numero+str(verificacion))
 
     else:
         print("---> Es un valor inválido de ISBN10\n")
+
+""" Función 7
+    Input: un número de ISBN13 sin verificador dando por el usuario 
+    Output: Resultado ISBN13 con verificador """
+
+
+def ISBN13_Digito(numero):
+
+    impares = 0
+    pares = 0
+    for i, lol in enumerate(numero):
+        j = i+1
+
+        if j % 2 == 0:
+            pares += int(lol)
+        else:
+            impares += int(lol)
+
+    suma = (pares * 3) + impares
+
+    resultado = suma % 10
+    verificador = 10-resultado
+
+    if isinstance(verificador,int):
+        print("---> El ISBN13 con el dígito identificador es:"+ numero+str(verificador))
+
+    else:
+        print("---> Es un valor inválido de ISBN 13\n")
+
+
+""" Función 8
+    Input: un número de NIT sin verificador dando por el usuario 
+    Output: Resultado NIT con verificador """
+
+def NIT_Digito(numero):
+
+    st= numero[:-1]
+
+    suma=0
+
+    conversion= np.array(list(numero))
+    reversa= np.flip(conversion)
+    eliminar1= np.delete(reversa,0)
+
+
+    for i,j in zip(eliminar1, range(2,len(numero)+1)):
+
+        k = int(i)*j
+
+        suma += k
+
+    comprobacion = math.floor(suma/11)
+    verificacion = comprobacion*11
+    operacion1 = suma - verificacion
+    operacion2= math.floor(operacion1/11)
+    operacion3= operacion2*11
+    operacion4 = operacion1-operacion3
+    operacion5= 11-operacion4
+
+
+    if isinstance(operacion5,int):
+        print("---> El NIT con el digito identificador es: "+st+str(operacion5))
+
+    else:
+        print("---> Es un valor inválido de NIT\n")
+
+
+
 
 
 lol = int(input("\n|BIENVENIDO AL VERFICADOR DE CÓDIGOS: | \n" +
@@ -265,11 +342,14 @@ while lol !=3:
               UPC_Digito(nit)
 
           elif y ==2:
-              print("2")
+              isbn10_digito = str(input("Ingresar número de ISBN10 sin verificador: "))
+              ISBN10_Digito(isbn10_digito)
           elif y ==3:
-              print("3")
+              isbn13_digito = str(input("Ingresar número de ISBN13 sin verificador: "))
+              ISBN13_Digito(isbn13_digito)
           elif y ==4:
-              print("4")
+              nitdi = str(input("Ingresar número de NIT sin verificador: "))
+              NIT_Digito(nitdi+"0")
           else:
 
               print("Ingresar valor válido")
